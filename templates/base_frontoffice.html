@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+
+{% block headtitle %}Frontoffice Homepage{% endblock headtitle %}
+{% block viewport %}<meta name="viewport" content="width=device-width, initial-scale=1.0">{% endblock viewport %}
+{% block style %}
+    <link href="{% static prefix %}components/fontawesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="{% static prefix %}components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,300' rel='stylesheet'>
+    <link href="{% static prefix %}frontoffice/css/style.css" rel="stylesheet">
+    {% block extrastyle %}{% endblock extrastyle %}
+{% endblock style %}
+{% block headjs %}{% endblock headjs %}
+{% block extraheadbottom %}{% endblock extraheadbottom %}
+{% block extrabodytop %}{% endblock extrabodytop %}
+{% block bodycontent %}
+    {% block header %}{% endblock header %}
+    {% block navbar %}{% endblock navbar %}
+    {% block content %}{% endblock content %}
+    {% block footer %}{% endblock footer %}
+{% endblock bodycontent %}
+
+{% block bodyjs %}
+    <script src="{% static prefix %}components/jquery/jquery.min.js"></script>
+    <script src="{% static prefix %}components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="{% static prefix %}frontoffice/js/min/script.min.js"></script>
+    {% block extrabodyjs %}{% endblock extrabodyjs %}
+{% endblock bodyjs %}
