@@ -8,9 +8,8 @@ https://docs.djangoproject.com/en/1.8/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.8/ref/settings/
 """
-
 import os
-import dj_database_url
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -31,12 +30,21 @@ TEMPLATE_DEBUG = True
 # Application definition
 
 INSTALLED_APPS = (
+
+    # default apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # local apps
+    # 'backoffice',
+    # 'frontoffice',
+
+    # third party apps
+    # 'bootstrap_django_tags',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -84,18 +92,13 @@ DATABASES = {
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
-TIME_ZONE = 'UTC'
+# Internationalization and localization
+LANGUAGE_CODE = 'en'
+TIME_ZONE = 'Europe/Rome'  # 'UTC'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
-
-
-# Parse database configuration from $DATABASE_URL
-DATABASES['default'] =  dj_database_url.config()
-
-# Enable Connection Pooling (if desired)
-DATABASES['default']['ENGINE'] = 'django_postgrespool'
+# LOCALE_PATHS = BASE_DIR + '/locale'
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
@@ -117,3 +120,49 @@ STATICFILES_DIRS = (
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
+DEFAULT_LOG_LEVEL = 'WARNING'
+
+_HANDLERS = {
+    'console': {
+        'level': DEFAULT_LOG_LEVEL,
+        'formatter': 'default',
+        'class': 'logging.StreamHandler'
+    },
+}
+
+LOG_FORMAT = '[%(levelname)s %(asctime)s %(name)s %(module)s: %(processName)s] %(message)s'
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+    'formatters': {
+        'default': {
+            'format': LOG_FORMAT
+        }
+    },
+    'handlers': _HANDLERS,
+    'loggers': {
+        'django': {
+            'level': DEFAULT_LOG_LEVEL,
+        },
+        'custom': {
+            'level': DEFAULT_LOG_LEVEL,
+        },
+    },
+    'root': {
+        'handlers': _HANDLERS.keys(),
+        'level': DEFAULT_LOG_LEVEL,
+    }
+}
+
+# Uncomment the ENV to get it ready
+ENV = 'local'
+# ENV = 'prod'
+
+# Loading test/prod settings based on ENV settings
+if ENV == 'prod':
+    try:
+        from prod_settings import *
+    except ImportError:
+        pass
