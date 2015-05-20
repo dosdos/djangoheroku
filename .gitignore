@@ -113,3 +113,6 @@ crashlytics.properties
 crashlytics-build.properties
 
 
+# djangoheroku custom ignored files
+djangoheroku/static/components
+etc/node_modules
