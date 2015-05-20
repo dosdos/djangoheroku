@@ -41,7 +41,7 @@ INSTALLED_APPS = (
 
     # local apps
     # 'backoffice',
-    # 'frontoffice',
+    'frontoffice',
 
     # third party apps
     # 'bootstrap_django_tags',
@@ -63,7 +63,7 @@ ROOT_URLCONF = 'djangoheroku.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates', ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
