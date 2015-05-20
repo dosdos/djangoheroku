@@ -1,0 +1,36 @@
+{
+  "name": "etc",
+  "version": "0.0.0",
+  "authors": [
+    "zing <info@zing-store.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "components",
+    "test",
+    "tests"
+  ],
+  "preen": {
+    "jquery": [
+      "jquery.min.js",
+      "jquery.min.map"
+    ],
+    "fontawesome": [
+      "css/font-awesome.min.css",
+      "fonts/*.*"
+    ],
+    "bootstrap": [
+      "dist/css/bootstrap.min.css",
+      "dist/css/bootstrap-theme.min.css",
+      "dist/fonts/*",
+      "dist/js/bootstrap.min.js"
+    ]
+  },
+  "devDependencies": {
+    "jquery": "~1.9.1",
+    "fontawesome": "~4.2.0",
+    "bootstrap": "~3.2.0"
+  }
+}
