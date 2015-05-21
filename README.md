@@ -22,24 +22,34 @@ heroku login
 3. Set up grunt, install bower components and use grunt watch
     - Move to etc folder 
 
-        ```cd etc```
+        ```
+        cd etc
+        ```
         
+
+
     - Install grunt modules (make sure you have `node.js` and `node package manager` (aka `npm`) installed)
         
         ```sudo npm install```
     
+
+
     - Install bower components 
 
         ```bower install```
+
 
         
     - Launch grunt default: it will automatically compile every less file and js file, preen bower components and check for js errors thanks to jshint 
     
         ```grunt```
         
+
+
     - Launch grunt watch: it's a watcher that keeps listening and compiles less and compresses js file a file is changed 
     
         ```grunt watch```
+
 
 
 ## Deploy to Heroku
@@ -81,17 +91,20 @@ If this was your first deploy we need to set up the db. Heroku allows to command
     git remote remove heroku
     ```
     
+
 2. (Optional) Create additional super user
     
     ```
     heroku run python manage.py createsuperuser
     ```
     
+
 3. Migrate
     
     ```
     heroku run python manage.py migrate
     ```
+
 Note: to review database coordinates and status use `heroku pg` command
 
 4. Access heroku database from shell (please, make sure you have installed Postgres locally)
@@ -99,6 +112,7 @@ Note: to review database coordinates and status use `heroku pg` command
     ```
     heroku pg:psql
     ```
+
 
 ## Handy commands
 ### Open heroku app directly in browser
@@ -167,11 +181,13 @@ Heroku allows to store configuration variables, such as encryption keys or exter
     heroku config:set TIMES=2
     ```
 
+
 2. Review all configuration variables
 
     ```
     heroku config
     ```
+
 
 ## Further Reading
 - [Getting Started with Python on Heroku](https://devcenter.heroku.com/articles/getting-started-with-python#define-a-procfile)
