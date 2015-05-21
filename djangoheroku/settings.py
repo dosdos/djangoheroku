@@ -156,11 +156,8 @@ LOGGING = {
     }
 }
 
-# Uncomment the ENV to get it ready
-# ENV = 'local'
-ENV = 'prod'
-
 # Loading test/prod settings based on ENV settings
+ENV = os.environ.get('ENV', 'local')
 if ENV == 'prod':
     try:
         from production_settings import *
