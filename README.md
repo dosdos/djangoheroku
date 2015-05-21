@@ -1,42 +1,159 @@
-# Heroku Django Starter Template
+# Django Heroku Base App
 
-An utterly fantastic project starter template for Django 1.8.
+A django heroku project template based on [https://github.com/heroku/heroku-django-template](https://github.com/heroku/heroku-django-template) enriched with the most needed django features and packages.
 
-## Features
+## Prerequisites
+### Heroku Toolbelt and Login
+Run this from your terminal (please ensure that you have Ruby installed):
 
-- Production-ready configuration for Static Files, Database Settings, Gunicorn, etc.
-- Enhancements to Django's static file serving functionality via WhiteNoise
-- Enhancements to Django's database functionality via django-postgrespool and dj-database-url
+```
+wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
+```
 
-## How to Use
+Login into Heroku from shell with your heroku credentials (you can sign up for free [here](https://signup.heroku.com/www-header))
 
-To use this project, follow these steps:
+```
+heroku login
+```
 
-1. Create your working environment.
-2. Install Django (`$ pip install django`)
-3. Create a new project using this template
+## Install
+1. Clone this project
+2. Create your venv working environment: Pycharm > Settings > Project Interpreter > (Coil icon) > Create VirtualEnv
 
-## Creating Your Project
+## Deploy to Heroku
+### Set up remotes
+First check the remotes of the project
 
-Using this template to create a new Django app is easy::
+```
+git remote --v
+```
 
-    $ django-admin.py startproject --template=https://github.com/heroku/heroku-django-template/archive/master.zip --name=Procfile helloworld
+If `heroku` is already among your git remotes, but is not pointing to the right application, remove the `heroku` remote
 
-You can replace ``helloworld`` with your desired project name.
+```
+git remote remove heroku
+```
 
-## Deployment to Heroku
+Add your heroku app to git remotes
 
-    $ git init
-    $ git add -A
-    $ git commit -m "Initial commit"
+```
+heroku git:remote -a <app_name>
+```
 
-    $ heroku create
-    $ git push heroku master
+### Deploy
+Deploying your code to heroku is done through git
 
-    $ heroku run python manage.py migrate
+```
+git push heroku master
+```
+
+Note: make sure your local `master` branch is always aligned with `origin master`. If not aligned, when pushing to `heroku master`, heroku blocks the push launching an error.
+
+
+### Database
+If this was your first deploy we need to set up the db. Heroku allows to commands through its toolbelt `run` command.
+
+1. Syncdb
+
+    ```
+    git remote remove heroku
+    ```
+    
+2. (Optional) Create additional super user
+    
+    ```
+    heroku run python manage.py createsuperuser
+    ```
+    
+3. Migrate
+    
+    ```
+    heroku run python manage.py migrate
+    ```
+Note: to review database coordinates and status use `heroku pg` command
+
+4. Access heroku database from shell (please, make sure you have installed Postgres locally)
+
+    ```
+    heroku pg:psql
+    ```
+
+## Handy commands
+### Open heroku app directly in browser
+
+```
+heroku open
+```
+
+### Heroku status
+Allows to see the application status, if it's running or sleeping, if deployment was successful
+
+```
+heroku ps
+```
+
+### Assign number of app instances (dynos):
+Warning! Setting up a higher than 1 number of dynos may cause the service to be not free anymore
+
+```
+heroku ps:scale web=1
+```
+
+### Using Django shell
+
+```
+heroku run python manage.py shell
+```
+
+### Heroku logs
+If you are not using an external logging service (aka [Logentries](https://logentries.com/) or [Papertrail](https://addons.heroku.com/papertrail)) heroku logs come in handy
+
+```
+heroku logs --tail
+```
+
+Note: there is a free [logentries plugin](https://addons.heroku.com/logentries) for heroku that eases the process to connect logentries with your heroku app
+
+
+### Add addons
+The example is Papertrail addon, a logging service that allows to store logs with an higher size and time retention than the heroku 1500 log entries limit
+
+1. Add addon
+
+    ```
+    heroku addons:create papertrail
+    ```
+
+2. Check list of active addons
+
+    ```
+    heroku addons
+    ```
+    
+3. Open logs in shell
+
+    ```
+    heroku addons:open papertrail
+    ```
+
+## Config vars
+Heroku allows to store configuration variables, such as encryption keys or external resource addresses in config vars ([source](https://devcenter.heroku.com/articles/getting-started-with-python#define-config-vars)).
+
+1. Set a new configuration variable
+
+    ```
+    heroku config:set TIMES=2
+    ```
+
+2. Review all configuration variables
+
+    ```
+    heroku config
+    ```
 
 ## Further Reading
-
+- [Getting Started with Python on Heroku](https://devcenter.heroku.com/articles/getting-started-with-python#define-a-procfile)
+- [Getting Started with Django on Heroku](https://devcenter.heroku.com/articles/getting-started-with-django)
 - [Gunicorn](https://warehouse.python.org/project/gunicorn/)
 - [WhiteNoise](https://warehouse.python.org/project/whitenoise/)
 - [django-postgrespool](https://warehouse.python.org/project/django-postgrespool/)
