@@ -1,0 +1,1 @@
+var letter="b",number=2,object={l:letter,n:number};

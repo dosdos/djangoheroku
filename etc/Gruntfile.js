@@ -15,6 +15,7 @@ module.exports = function (grunt) {
                 }
             },
             myFiles: [
+                '../backoffice/static/backoffice/js/*.js',
                 '../frontoffice/static/frontoffice/js/*.js'
             ]
         },
@@ -26,6 +27,13 @@ module.exports = function (grunt) {
                         cwd: '../frontoffice/static/frontoffice/js',
                         src: '*.js',
                         dest: '../frontoffice/static/frontoffice/js/min',
+                        ext: '.min.js'
+                    },
+                    {
+                        expand: true,
+                        cwd: '../backoffice/static/backoffice/js',
+                        src: '*.js',
+                        dest: '../backoffice/static/backoffice/js/min',
                         ext: '.min.js'
                     }
                 ]
@@ -39,12 +47,15 @@ module.exports = function (grunt) {
                     optimization: 2
                 },
                 files: {
+                    "../backoffice/static/backoffice/css/style.css": "../backoffice/static/backoffice/less/style.less",
                     "../frontoffice/static/frontoffice/css/style.css": "../frontoffice/static/frontoffice/less/style.less"
                 }
             }
         },
         watch: {
             files: [
+                "../backoffice/static/backoffice/less/*",
+                "../backoffice/static/backoffice/js/*",
                 "../frontoffice/static/frontoffice/less/*",
                 "../frontoffice/static/frontoffice/js/*"
             ],
