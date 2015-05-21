@@ -163,6 +163,6 @@ ENV = 'prod'
 # Loading test/prod settings based on ENV settings
 if ENV == 'prod':
     try:
-        from prod_settings import *
+        from production_settings import *
     except ImportError:
         pass
