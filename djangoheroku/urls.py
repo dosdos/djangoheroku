@@ -6,6 +6,9 @@ from django.contrib import admin
 urlpatterns = patterns(
     '',
 
+    # backoffice
+    url(r'^backoffice/', include('backoffice.urls')),
+
     # django admin
     url(r'^admin/', include(admin.site.urls)),
 )

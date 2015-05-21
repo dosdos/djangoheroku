@@ -40,7 +40,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
 
     # local apps
-    # 'backoffice',
+    'backoffice',
     'frontoffice',
 
     # third party apps
