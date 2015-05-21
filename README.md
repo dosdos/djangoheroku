@@ -39,6 +39,14 @@ heroku login
     - Launch grunt watch: it's a watcher that keeps listening and compiles less and compresses js file a file is changed 
     
         ```grunt watch```
+        
+4. Add ENV='prod' variable in heroku
+
+    ```
+    heroku config:set ENV='prod'
+    ```
+
+5. Deploy app to heroku
 
 ## Deploy to Heroku
 ### Set up remotes
