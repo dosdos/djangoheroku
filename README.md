@@ -22,35 +22,23 @@ heroku login
 3. Set up grunt, install bower components and use grunt watch
     - Move to etc folder 
 
-        ```
-        cd etc
-        ```
+        ```cd etc```
         
-
-
     - Install grunt modules (make sure you have `node.js` and `node package manager` (aka `npm`) installed)
         
         ```sudo npm install```
     
-
-
     - Install bower components 
 
         ```bower install```
 
-
-        
     - Launch grunt default: it will automatically compile every less file and js file, preen bower components and check for js errors thanks to jshint 
     
         ```grunt```
-        
-
 
     - Launch grunt watch: it's a watcher that keeps listening and compiles less and compresses js file a file is changed 
     
         ```grunt watch```
-
-
 
 ## Deploy to Heroku
 ### Set up remotes
