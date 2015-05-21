@@ -157,8 +157,8 @@ LOGGING = {
 }
 
 # Uncomment the ENV to get it ready
-ENV = 'local'
-# ENV = 'prod'
+# ENV = 'local'
+ENV = 'prod'
 
 # Loading test/prod settings based on ENV settings
 if ENV == 'prod':
