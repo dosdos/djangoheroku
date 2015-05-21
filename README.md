@@ -21,8 +21,7 @@ heroku login
 2. Create your venv working environment: Pycharm > Settings > Project Interpreter > (Coil icon) > Create VirtualEnv
 3. Set up grunt, install bower components and use grunt watch
     - Move to etc folder 
-
-        cd etc
+        `cd etc`
         
     - Install grunt modules (make sure you have `node.js` and `node package manager` (aka `npm`) installed)
         
