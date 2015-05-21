@@ -24,7 +24,7 @@ heroku login
 
         ```cd etc```
         
-    - Install grunt modules (make sure you have `node.js` and `node package manager` (aka `npm`) installed)
+    - Install grunt modules (make sure you have `node.js` and `node package manager` installed)
         
         ```sudo npm install```
     
