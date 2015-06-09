@@ -20,7 +20,7 @@
         <meta name="author" content="{% block author %}Zing Srl{% endblock author %}"/>
         <meta name="keywords" content="{% block keywords %}{% endblock keywords %}">
 
-        {% block seo %}{% endblock seo %}
+        {% block seo %}{% include "tags/seo.html" %}{% endblock seo %}
         {% block blockbots %}{% endblock blockbots %}
         {% block favicon %}{% endblock favicon %}
         {% block style %}{% endblock style %}
