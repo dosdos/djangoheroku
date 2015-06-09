@@ -3,7 +3,7 @@
 
 
 {% block headtitle %}Frontoffice Homepage{% endblock headtitle %}
-{% block viewport %}<meta name="viewport" content="width=device-width, initial-scale=1.0">{% endblock viewport %}
+
 {% block style %}
     <link href="{% static prefix %}components/fontawesome/css/font-awesome.min.css" rel="stylesheet">
     <link href="{% static prefix %}components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -11,9 +11,7 @@
     <link href="{% static prefix %}backoffice/css/style.css" rel="stylesheet">
     {% block extrastyle %}{% endblock extrastyle %}
 {% endblock style %}
-{% block headjs %}{% endblock headjs %}
-{% block extraheadbottom %}{% endblock extraheadbottom %}
-{% block extrabodytop %}{% endblock extrabodytop %}
+
 {% block bodycontent %}
     {% block header %}{% endblock header %}
     {% block navbar %}{% endblock navbar %}
