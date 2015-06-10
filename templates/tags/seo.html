@@ -1,12 +1,12 @@
 {% load staticfiles %}
-<meta name="description" content="Find Your Gear"/>
-<meta name="author" content="Find Your Gear"/>
-<meta name="keywords" content="Find Your Gear">
+<meta name="description" content="{% block description %}Django Heroku{% endblock description %}"/>
+<meta name="author" content="{% block author %}Zing Srl{% endblock author %}"/>
+<meta name="keywords" content="{% block keywords %}{% endblock keywords %}">
 <meta property="og:type" content="{% block og_type %}website{% endblock og_type %}">
-<meta property="og:title" content="{% block og_title %}Find Your Gear{% endblock og_title %}">
-<meta property="og:description" content="{% block og_description %}Find Your Gear{% endblock og_description %}" itemprop="description">
-<meta property="og:url" content="{% block og_url %}http://findyourgear.com{% endblock og_url %}" itemprop="url">
+<meta property="og:title" content="{% block og_title %}Django Heroku{% endblock og_title %}">
+<meta property="og:description" content="{% block og_description %}Django Heroku{% endblock og_description %}" itemprop="description">
+<meta property="og:url" content="{% block og_url %}http://example.com{% endblock og_url %}" itemprop="url">
 <meta property="og:image" content="{% block og_image1 %}{% static prefix %}frontoffice/img/runners.jpg{% endblock og_image1 %}" itemprop="image">
 <meta property="og:image" content="{% block og_image2 %}{% static prefix %}frontoffice/img/bike.jpg{% endblock og_image2 %}" itemprop="image">
-<meta property="og:site_name" content="{% block og_site_name %}Find Your Gear{% endblock og_site_name %}" itemprop="name">
-<link rel="canonical" href="http://findyourgear.com" />
+<meta property="og:site_name" content="{% block og_site_name %}Django Heroku{% endblock og_site_name %}" itemprop="name">
+<link rel="canonical" href="http://example.com" />
