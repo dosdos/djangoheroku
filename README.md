@@ -45,8 +45,15 @@ heroku login
     ```
     heroku config:set ENV='prod'
     ```
-
 5. Deploy app to heroku
+
+## Environmental Variables
+Please note that to store env variable in local machine is necessary to add them to the venv activate file in order to use them while venv is running. Just add to activate file
+
+```
+export SECRET_KEY="here_the_diango_secret_key"
+```
+
 
 ## Deploy to Heroku
 ### Set up remotes
