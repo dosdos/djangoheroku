@@ -32,12 +32,13 @@ heroku login
     - Install bower components  
     - Launch grunt default: it will automatically compile every less file and js file, preen bower components and check for js errors thanks to jshint   
 
-    ```
-    cd etc
-    sudo npm install
-    bower install
-    grunt
-    ```
+ 
+```
+cd etc
+sudo npm install
+bower install
+grunt
+```
 
 
 4. Add ENV='prod' variable in heroku
