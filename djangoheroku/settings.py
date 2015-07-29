@@ -9,6 +9,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.8/ref/settings/
 """
 import os
+from django.utils.translation import ugettext_lazy as _
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -44,7 +45,7 @@ INSTALLED_APPS = (
     'frontoffice',
 
     # third party apps
-    # 'bootstrap_django_tags',
+    'social.apps.django_app.default',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -77,6 +78,8 @@ TEMPLATES = [
     },
 ]
 
+TEMPLATE_CONTEXT_PROCESSORS = ()
+
 WSGI_APPLICATION = 'djangoheroku.wsgi.application'
 
 
@@ -100,6 +103,10 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 LOCALE_PATHS = (BASE_DIR + '/locale', )
+LANGUAGES = (
+    ('en', _('English')),
+    ('it', _('Italian')),
+)
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
@@ -156,6 +163,79 @@ LOGGING = {
         'level': DEFAULT_LOG_LEVEL,
     }
 }
+
+
+######################
+# Url configurations #
+######################
+DOMAIN = "example.com"
+DOMAIN_URL = "http://www." + DOMAIN
+LOGIN_URL = "/login/"
+PRIVACY_POLICY_URL = ""
+FACEBOOK_APP_ID = "..."
+EMAIL_ADDRESS_FOR_SUPPORT = "support@" + DOMAIN
+
+
+######################
+# Python Social Auth #
+######################
+
+LOGIN_REDIRECT_URL = '/'
+SOCIAL_AUTH_LOGIN_ERROR_URL = '/'
+MIDDLEWARE_CLASSES += (
+    'social.apps.django_app.middleware.SocialAuthExceptionMiddleware',
+)
+
+AUTHENTICATION_BACKENDS = (
+    'social.backends.facebook.FacebookOAuth2',
+    'social.backends.linkedin.LinkedinOAuth',
+    'social.backends.twitter.TwitterOAuth',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+TEMPLATE_CONTEXT_PROCESSORS += (
+    'social.apps.django_app.context_processors.backends',
+    'social.apps.django_app.context_processors.login_redirect',
+)
+
+# LINKEDIN
+SOCIAL_AUTH_LINKEDIN_KEY = 'XXX'
+SOCIAL_AUTH_LINKEDIN_SECRET = 'XXX'
+# Add email to requested authorizations.
+SOCIAL_AUTH_LINKEDIN_SCOPE = ['r_basicprofile', 'r_emailaddress', ]
+# Add the fields so they will be requested from linkedin.
+SOCIAL_AUTH_LINKEDIN_FIELD_SELECTORS = ['email-address', 'headline', ]
+# Arrange to add the fields to UserSocialAuth.extra_data
+SOCIAL_AUTH_LINKEDIN_EXTRA_DATA = [('id', 'id'),
+                                   ('firstName', 'first_name'),
+                                   ('lastName', 'last_name'),
+                                   ('emailAddress', 'email_address'),
+                                   ('headline', 'headline')]
+
+# FACEBOOK
+SOCIAL_AUTH_FACEBOOK_KEY = 'XXX'
+SOCIAL_AUTH_FACEBOOK_SECRET = 'XXX'
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email', 'public_profile']
+
+# TWITTER
+SOCIAL_AUTH_TWITTER_KEY = 'XXX'
+SOCIAL_AUTH_TWITTER_SECRET = 'XXX'
+
+# PYTHON-SOCIAL-AUTH PIPELINE
+SOCIAL_AUTH_PIPELINE = (
+    'social.pipeline.social_auth.social_details',
+    'social.pipeline.social_auth.social_uid',
+    'social.pipeline.social_auth.auth_allowed',
+    'social.pipeline.social_auth.social_user',
+    'social.pipeline.user.get_username',
+    'social.pipeline.social_auth.associate_by_email',     # <--- avoid multiple mail account (NB: is not secure)
+    'social.pipeline.user.create_user',
+    'frontoffice.utils.create_user_profile',              # <--- eg: configure a UserProfile
+    'social.pipeline.social_auth.associate_user',
+    'social.pipeline.social_auth.load_extra_data',
+    'social.pipeline.user.user_details'
+)
+
 
 # Loading test/prod settings based on ENV settings
 ENV = os.environ.get('ENV', 'local')
