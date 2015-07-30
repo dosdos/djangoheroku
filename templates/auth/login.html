@@ -1,0 +1,62 @@
+{% extends 'base_frontoffice.html' %}
+{% load custom_tags %}
+{% load i18n %}
+
+
+{% block headtitle %}{% trans "Login" %} | djangoheroku{% endblock headtitle %}
+
+{% block pagecontent %}
+
+    <h2>{% trans "Login" %}</h2>
+
+    <div class="row">
+        <div class="col-md-4 col-sm-6 col-xs-8">
+
+            <form class="form-signin" role="form" action="{% url 'login' %}{% if next %}?next={{ next }}{% endif %}" method="POST">
+                {% if state %}<p>{{ state }}</p>{% endif %}
+                <br>
+                {% csrf_token %}
+                {% if next %}
+                <input type="hidden" name="next" value="{{ next }}"/>
+                {% endif %}
+                <div class="form-group {% if state %}has-error{% endif %}">
+                    <label>{% trans "Username" %}</label>
+                    <i class="fa fa-user"></i>
+                    <input class="form-control" type="text" id="username" name="username" placeholder="{% trans "Username" %}" required autofocus>
+                </div>
+                <div class="form-group {% if state %}has-error{% endif %}">
+                    <label>{% trans "Password" %}</label>
+                    <i class="fa fa-lock"></i>
+                    <input class="form-control" type="password" name="password" id="password" placeholder="{% trans "Password" %}" required>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-success btn-block">{% trans "Login" %}</button>
+                </div>
+            </form>
+
+            <br>
+
+            {# SOCIAL REGISTER #}
+            <strong>{% trans "Or register using a social account" %}</strong>
+
+            <br>
+
+            <a class="btn btn-info" href="{% url 'login' %}linkedin/{% if next %}?next={{ next }}{% endif %}">
+                <i class="fa fa-linkedin"></i>
+            </a>
+            <a class="btn btn-primary" href="{% url 'login' %}facebook/{% if next %}?next={{ next }}{% endif %}">
+                <i class="fa fa-facebook"></i>
+            </a>
+            <a class="btn btn-info" href="{% url 'login' %}twitter/{% if next %}?next={{ next }}{% endif %}">
+                <i class="fa fa-twitter"></i>
+            </a>
+            {# /SOCIAL REGISTER #}
+
+            <br>
+
+            <a href="{% url 'frontoffice_home' %}" class="btn btn-link">{% trans "Back to Homepage" %}</a>
+
+        </div>
+    </div>
+
+{% endblock pagecontent %}

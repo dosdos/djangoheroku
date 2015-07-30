@@ -1,0 +1,103 @@
+{% extends 'base_frontoffice.html' %}
+{% load custom_tags %}
+{% load i18n %}
+
+
+{% block headtitle %}{% trans "Sign Up" %} | djangoheroku{% endblock headtitle %}
+
+
+{% block pagecontent %}
+
+    <h2>{% trans "Sign Up" %}</h2>
+
+    <div class="row">
+        <div class="col-md-4 col-sm-6 col-xs-8">
+
+            <form role="form" action="{% url "signup" %}{% if next %}?next={{ next }}{% endif %}" method="post">
+                {% csrf_token %}
+                <div class="form-group {% if user_form.errors.username %}has-error{% endif %}">
+                    <label for="exampleInputName">{% trans "Username" %} <span class="text-danger">*</span></label>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1"><i class="fa fa-user"></i></span>
+                        {{ user_form.username }}
+                    </div>
+                    {% if user_form.errors.username %}<p class="help-block">{{ user_form.errors.username.as_text }}</p>{% endif %}
+                </div>
+                <div class="form-group {% if user_form.errors.email %}has-error{% endif %}">
+                    <label for="exampleInputName">{% trans "Email" %} <span class="text-danger">*</span></label>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1"><i class="fa fa-envelope-o"></i></span>
+                        {{ user_form.email }}
+                    </div>
+                    {% if user_form.errors.email %}<p class="help-block">{{ user_form.errors.email.as_text }}</p>{% endif %}
+                </div>
+                <div class="form-group {% if user_form.errors.password1 %}has-error{% endif %}">
+                    <label for="exampleInputName">{% trans "Password" %} <span class="text-danger">*</span></label>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1"><i class="fa fa-lock"></i></span>
+                        {{ user_form.password1 }}
+                    </div>
+                    {% if user_form.errors.password1 %}<p class="help-block">{{ user_form.errors.password1.as_text }}</p>{% endif %}
+                </div>
+                <div class="form-group {% if user_form.errors.password2 %}has-error{% endif %}">
+                    <label for="exampleInputName">{% trans "Password confirmation" %} <span class="text-danger">*</span></label>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1"><i class="fa fa-lock"></i></span>
+                        {{ user_form.password2 }}
+                    </div>
+                    {% if user_form.errors.password2 %}<p class="help-block">{{ user_form.errors.password2.as_text }}</p>{% endif %}
+                </div>
+                <div class="form-group {% if user_form.errors.first_name %}has-error{% endif %}">
+                    <label for="exampleInputName">{% trans "First Name" %} <span class="text-danger">*</span></label>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1"><i class="fa fa-font"></i></span>
+                        {{ user_form.first_name }}
+                    </div>
+                    {% if user_form.errors.first_name %}<p class="help-block">{{ user_form.errors.first_name.as_text }}</p>{% endif %}
+                </div>
+                <div class="form-group {% if user_form.errors.last_name %}has-error{% endif %}">
+                    <label for="exampleInputName">{% trans "Last Name" %} <span class="text-danger">*</span></label>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1"><i class="fa fa-font"></i></span>
+                        {{ user_form.last_name }}
+                    </div>
+                    {% if user_form.errors.last_name %}<p class="help-block">{{ user_form.errors.last_name.as_text }}</p>{% endif %}
+                </div>
+                <div class="form-actions">
+                    {% if hacker_form.errors.has_accepted_terms_and_conditions %}
+                    <p class="help-block" style="color: #b94a48;">
+                        {{ hacker_form.errors.has_accepted_terms_and_conditions.as_text }}
+                    </p>
+                    {% endif %}
+                    <label>{{ hacker_form.has_accepted_terms_and_conditions }} {% trans "I agree with the" %} <a target="_blank" href="{% privacy_policy_url %}">{% trans "Privacy Policy" %}</a></label>
+                    <button type="submit" class="btn btn-success">{% trans "Sign Up" %}</button>
+                </div>
+            </form>
+
+            <br>
+
+            {# SOCIAL REGISTER #}
+            <strong>{% trans "Or register using a social account" %}</strong>
+
+            <br>
+
+            <a class="btn btn-info" href="{% url 'login' %}linkedin/{% if next %}?next={{ next }}{% endif %}">
+                <i class="fa fa-linkedin"></i>
+            </a>
+            <a class="btn btn-primary" href="{% url 'login' %}facebook/{% if next %}?next={{ next }}{% endif %}">
+                <i class="fa fa-facebook"></i>
+            </a>
+            <a class="btn btn-info" href="{% url 'login' %}twitter/{% if next %}?next={{ next }}{% endif %}">
+                <i class="fa fa-twitter"></i>
+            </a>
+            {# /SOCIAL REGISTER #}
+
+            <br>
+
+            <a class="btn btn-link" href="{% url 'login' %}{% if next %}?next={{ next }}{% endif %}">{% trans "Login page" %}</a>
+            <a class="btn btn-link" href="{% url 'frontoffice_home' %}">{% trans "Back to Homepage" %}</a>
+
+        </div>
+    </div>
+
+{% endblock pagecontent %}

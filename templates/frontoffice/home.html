@@ -1,11 +1,25 @@
 {% extends "base_frontoffice.html" %}
 {% load staticfiles %}
+{% load i18n %}
 
 
-{% block content %}
+{% block pagecontent %}
 
     <div class="content">
-        <h2>Frontoffice Homepage</h2>
+        <h2>{% trans "Frontoffice Homepage" %}</h2>
+
+        <ul>
+            {% if user.is_authenticated %}
+                <li class="active"><a>{% trans "Benvenuto" %} {{ user.get_username }}</a></li>
+                <li><a href="{% url 'password_change' %}">{% trans "Cambio Password" %}</a></li>
+                <li><a href="{% url 'logout' %}">{% trans "Logout" %}</a></li>
+            {% else %}
+                <li class="active"><a>{% trans "Utente non autenticato" %}</a></li>
+                <li><a href="{% url 'login' %}">{% trans "Login" %}</a></li>
+                <li><a href="{% url 'signup' %}">{% trans "Signup" %}</a></li>
+            {% endif %}
+        </ul>
+
     </div>
 
-{% endblock content %}
+{% endblock pagecontent %}
