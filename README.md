@@ -103,18 +103,20 @@ If this was your first deploy we need to set up the db. Heroku allows to run com
     ```
     
 
-2. (Optional) Create additional super user
-    
-    ```
-    heroku run python manage.py createsuperuser
-    ```
-    
-
-3. Migrate
+2. Migrate
     
     ```
     heroku run python manage.py migrate
     ```
+    
+
+
+3. (Optional) Create additional super user
+    
+    ```
+    heroku run python manage.py createsuperuser
+    ```
+
 
 Note: to review database coordinates and status use `heroku pg` command
 
