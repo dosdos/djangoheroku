@@ -96,10 +96,10 @@ Note: make sure your local `master` branch is always aligned with `origin master
 ### Database
 If this was your first deploy we need to set up the db. Heroku allows to run commands through its toolbelt `run` command.
 
-1. Syncdb
+1. (Optional) Syncdb
 
     ```
-    git remote remove heroku
+    heroku run python manage.py syncdb
     ```
     
 
