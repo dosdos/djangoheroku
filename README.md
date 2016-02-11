@@ -203,6 +203,7 @@ Heroku allows to store configuration variables, such as encryption keys or exter
 
 
 ## Further Reading
+- [django-herokuapp](https://github.com/etianen/django-herokuapp)
 - [Getting Started with Python on Heroku](https://devcenter.heroku.com/articles/getting-started-with-python#define-a-procfile)
 - [Getting Started with Django on Heroku](https://devcenter.heroku.com/articles/getting-started-with-django)
 - [Gunicorn](https://warehouse.python.org/project/gunicorn/)
