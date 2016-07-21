@@ -18,35 +18,50 @@ heroku login
 
 ## Install
 1. Clone this project
+
+    ```
+    git clone git@bitbucket.org:Dosdos/djangoheroku.git
+    ```
+
 2. Create your venv working environment: Pycharm > Settings > Project Interpreter > (Coil icon) > Create VirtualEnv
+
 3. Set up grunt, install bower components and use grunt watch
+
     - Move to etc folder 
+    - Install grunt modules (make sure you have `node.js` and `node package manager` installed)  
+    - Install bower components  
+    - Launch grunt default: it will automatically compile every less file and js file, preen bower components and check for js errors thanks to jshint   
 
-        ```cd etc```
-        
-    - Install grunt modules (make sure you have `node.js` and `node package manager` installed)
-        
-        ```sudo npm install```
-    
-    - Install bower components 
+ 
+```
+cd etc
+sudo npm install
+bower install
+grunt
+```
 
-        ```bower install```
 
-    - Launch grunt default: it will automatically compile every less file and js file, preen bower components and check for js errors thanks to jshint 
-    
-        ```grunt```
-
-    - Launch grunt watch: it's a watcher that keeps listening and compiles less and compresses js file a file is changed 
-    
-        ```grunt watch```
-        
 4. Add ENV='prod' variable in heroku
 
-    ```
-    heroku config:set ENV='prod'
-    ```
+    ```   heroku config:set ENV='prod'  ```
 
 5. Deploy app to heroku
+
+
+### Grunt watch
+Launch grunt watch: it's a watcher that keeps listening and compiles less and compresses js file when a file is changed
+
+```
+grunt watch
+```
+
+## Environmental Variables
+Please note that to store env variable in local machine is necessary to add them to the venv activate file in order to use them while venv is running. Just add to activate file
+
+```
+export SECRET_KEY="here_the_diango_secret_key"
+```
+
 
 ## Deploy to Heroku
 ### Set up remotes
@@ -81,25 +96,27 @@ Note: make sure your local `master` branch is always aligned with `origin master
 ### Database
 If this was your first deploy we need to set up the db. Heroku allows to run commands through its toolbelt `run` command.
 
-1. Syncdb
+1. (Optional) Syncdb
 
     ```
-    git remote remove heroku
+    heroku run python manage.py syncdb
     ```
     
 
-2. (Optional) Create additional super user
-    
-    ```
-    heroku run python manage.py createsuperuser
-    ```
-    
-
-3. Migrate
+2. Migrate
     
     ```
     heroku run python manage.py migrate
     ```
+    
+
+
+3. (Optional) Create additional super user
+    
+    ```
+    heroku run python manage.py createsuperuser
+    ```
+
 
 Note: to review database coordinates and status use `heroku pg` command
 
@@ -186,6 +203,7 @@ Heroku allows to store configuration variables, such as encryption keys or exter
 
 
 ## Further Reading
+- [django-herokuapp](https://github.com/etianen/django-herokuapp)
 - [Getting Started with Python on Heroku](https://devcenter.heroku.com/articles/getting-started-with-python#define-a-procfile)
 - [Getting Started with Django on Heroku](https://devcenter.heroku.com/articles/getting-started-with-django)
 - [Gunicorn](https://warehouse.python.org/project/gunicorn/)
