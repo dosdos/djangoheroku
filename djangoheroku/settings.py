@@ -25,8 +25,6 @@ SECRET_KEY = "zxu_l$p+swpk7sg&(3&*@j0jai&+ov+@okh59x+r5v6tfhquin"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-TEMPLATE_DEBUG = True
-
 
 # Application definition
 
@@ -77,8 +75,6 @@ TEMPLATES = [
         },
     },
 ]
-
-TEMPLATE_CONTEXT_PROCESSORS = ()
 
 WSGI_APPLICATION = 'djangoheroku.wsgi.application'
 
@@ -193,10 +189,6 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
-TEMPLATE_CONTEXT_PROCESSORS += (
-    'social.apps.django_app.context_processors.backends',
-    'social.apps.django_app.context_processors.login_redirect',
-)
 
 # LINKEDIN
 SOCIAL_AUTH_LINKEDIN_KEY = 'XXX'
